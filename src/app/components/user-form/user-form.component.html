@@ -39,7 +39,7 @@
         <p class="text-center">Fill Out Form.</p>
     </div>
     <p class="text-center custom-text for-mobile mb-2 pt-2">Fill Out Details.</p>
-    <form [formGroup]="userForm" class="pt-lg-4 p-2 px-lg-3">
+    <form [formGroup]="userForm" (submit)="makePayment()" class="pt-lg-4 p-2 px-lg-3">
         <div class="d-flex justify-content-between mt-lg-4 mb-2">
             <div style="flex: 0.47;">
                 <label class="place-holder-label">
@@ -113,6 +113,8 @@
             <small style="font-family: Proxima-bold;" class="d-block" *ngIf="phoneNumber.errors.pattern">This field accepts digits only. </small>
         </div>
         <small style="font-family: Proxima-bold;"  *ngIf="phoneNumber.touched && country.invalid" class="text-left text-danger error-msg">Please select a country</small>
-        <button [disabled]="userForm.invalid" class="btn btn-primary mt-4" (click)="toggleForm()" >GET STARTED</button>
+        <button [disabled]="userForm.invalid" class="btn btn-primary mt-4" type="submit" >GET STARTED <img *ngIf="loading" src="/assets/Rolling-0.5s-200px.svg" height="30 " alt=""></button>
     </form>
 </div>
+
+<div id="snackbar" [ngClass]="successMessage? 'bg-success' : errorMessage? 'bg-danger' : 'bg-info'">{{successMessage || errorMessage}}</div>

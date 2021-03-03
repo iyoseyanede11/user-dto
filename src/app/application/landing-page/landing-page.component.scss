@@ -1,6 +1,14 @@
 .wrapper{
     font-family: Proxima-reg, Helvetica, Arial, sans-serif;
 }
+.eclipse{
+    position: absolute;
+    z-index: 2;
+}
+.form-holder{
+    position: relative;
+    z-index: 3;
+}
 small{
     font-size: 13px;
     font-style: italic;

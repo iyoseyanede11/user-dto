@@ -13,7 +13,7 @@ export class PaymentService {
     
     BASE_URL = 'https://run.mocky.io/v3'
 
-    createUser = (resource: User) => this.http.post(this.BASE_URL + '/a171ec32-62d7-4fcf-a5e7-37d72cdc781d', resource)
+    userPayment = (resource: User) => this.http.post(this.BASE_URL + '/a171ec32-62d7-4fcf-a5e7-37d72cdc781d', resource)
     .pipe(
         tap(object => console.log(object)),
         retryWhen(error => error.pipe(

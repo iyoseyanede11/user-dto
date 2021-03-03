@@ -1,20 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { PaymentService } from '../../services/payment.service'
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/models/app-state.model';
+import { MakePaymentAction } from 'src/app/store/actions/payment.action';
+import { User } from 'src/app/store/models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.scss']
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  constructor(private paymentService: PaymentService, protected store: Store<AppState>, private router: Router) { }
 
   ngOnInit(): void {
   }
+    // unsubscribe from observables when the component is destroyed to avoid memory leaks
+  ngOnDestroy(): void{
+    if(this.paymentObservableSubscription)
+    this.paymentObservableSubscription.unsubscribe();
+  }
 
-  isUserForm: boolean = true;
+
+  isUserForm: boolean;
   selectedCountry: any;
+  loading: boolean;
+  successMessage: string;
+  errorMessage: string;
+  paymentObservableSubscription: Subscription;
   findCountry = (e) => {
     this.selectedCountry = this.countries.find(country => country.dialCode == e.target.value)
   }
@@ -1495,7 +1512,7 @@ export class UserFormComponent implements OnInit {
     advertBudget: new FormControl('', [Validators.required,Validators.pattern('^[0-9]*$')]),
     country: new FormControl('', Validators.required),
     company: new FormControl(''),
-    phoneNumber: new FormControl('',  [Validators.required, Validators.minLength(10), Validators.maxLength(14), Validators.pattern('^[0-9]*$')])
+    phoneNumber: new FormControl('',  [Validators.required, Validators.minLength(6), Validators.maxLength(14), Validators.pattern('^[0-9]*$')])
   })
   // Form Getters
   get firstName(){
@@ -1519,5 +1536,50 @@ export class UserFormComponent implements OnInit {
   get phoneNumber(){
     return this.userForm.get('phoneNumber')
   }
+
+    // method that shows toast
+    showToast = () :void => {
+      let toast = document.getElementById("snackbar");
+      toast.className = "show";
+      setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 4000);
+    }
+    
+    //payment method
+    makePayment = () => {
+      this.successMessage = null;
+      this.errorMessage = null;
+      this.loading = true;
+      this.userForm.disable();
+      const requestPayload: User = {
+          firstName: this.firstName.value,
+          lastName: this.lastName.value,
+          email: this.email.value,
+          advertBudget: parseInt(this.advertBudget.value),
+          phoneNumber: parseInt(this.selectedCountry.dialCode + this.phoneNumber.value),
+      };
+      this.paymentObservableSubscription = this.paymentService.userPayment(requestPayload)
+        .subscribe(
+          (res: any) => {
+            this.loading = false;
+            this.userForm.enable();
+          if(res && res.responseCode === '00'){
+            this.successMessage = "User Onboarding and Payment Successful";
+            this.showToast();
+            this.userForm.reset();
+            this.store.dispatch(new MakePaymentAction(requestPayload));
+            setTimeout(() => this.router.navigate(['/user-details']), 5000)
+          }else{
+            this.errorMessage = "Something went wrong, Payment Not Successful";
+            this.showToast();
+          }
+        },
+        err => {
+          this.userForm.enable();
+          this.errorMessage = "Payment Not Successful";
+          this.showToast();
+          this.loading = false;
+        }
+      )
+    }
 
 }
