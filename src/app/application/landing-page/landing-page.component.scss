@@ -1,0 +1,62 @@
+.wrapper{
+    font-family: Proxima-reg, Helvetica, Arial, sans-serif;
+}
+small{
+    font-size: 13px;
+    font-style: italic;
+}
+.section__1,.section__2,.section__3,.section__4{
+    display: block;
+    width: 100%;
+}
+.section__1__logo{
+    height: 54px;
+    width: 158px;
+}
+.section__1__image-wrapper{
+    height: 350px;
+}
+.section__1__image-wrapper__icon{
+    height: 165px;
+    width: 230px;
+    align-self: start;
+    margin-left: -35px;
+}
+.section__1__image-wrapper__image{
+    min-height: 180px;
+    width: 468px;
+    margin-left: -200px;
+}
+.section__2{
+    height: 231px;
+    background: url("/assets/Group 393@2x.png") center center/ cover no-repeat;
+}
+.section__4{
+    background: transparent linear-gradient(180deg, var(--unnamed-color-38ccf5) 0%, #3ECCF5 0%, #42CCF5 16%, #36C1EE 38%, #119FD6 62%, #2A97BF 81%, #108ABF 100%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #38CCF5 0%, #3ECCF5 0%, #42CCF5 16%, #36C1EE 38%, #119FD6 62%, #2A97BF 81%, #108ABF 100%) 0% 0% no-repeat padding-box;
+    color: white !important;
+    font-family: Proxima-reg, Helvetica, Arial, sans-serif;
+}
+.color-change{
+    color: #008CC9;
+    margin: 50px 0px;
+    font-weight: 600;
+}
+.auto-align {
+    text-align: center;
+    font-family: proxima-reg;
+}
+@media only screen and (min-width: 577px){
+    .auto-align {
+        text-align: left;
+        font-family: proxima-bold;
+    }
+    .color-change{
+        font-weight: normal;
+        color: var(--custom-text);
+    }
+    .section__2{
+        height: 431px;
+    }
+
+}

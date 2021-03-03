@@ -1,0 +1,69 @@
+<div class="w-100 pt-0 pt-lg-5 wrapper">
+    <div class="section__1  py-4">
+        <div class="row custom-container mx-auto align-items-center">
+            <div class="col-lg-6">
+                <img src="/assets/filed-logo-01@2x.png" class="section__1__logo mb-5 for-desktop" alt="logo">
+                <h2 style="font-size: 42px;" class="pt-4 mb-5 text-left for-desktop">Book a demo today and <br> get two weeks for <span class="custom-text">free.</span> Why?</h2>
+                <h1 style="font-size: 34px;" class="pt-4 mb-4 text-center for-mobile">Book a demo today and get two weeks for <span style="color: #FF6E4E;">free.</span> Why?</h1>
+                <h4 class="auto-align mb-4 mb-lg-5">Because Our AI-Powered Software <br> Will Exceed Your Marketing Goals.</h4>
+                <div class="for-desktop">
+                    <div class="section__1__image-wrapper d-flex justify-content-start align-items-end">
+                        <object data="/assets/grid.svg" class="section__1__image-wrapper__icon" type="image/svg+xml"></object>
+                        <img src="/assets/Artboard 1.png" class="section__1__image-wrapper__image" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                    <app-user-form></app-user-form>
+            </div>
+        </div>
+    </div>
+    <div class="section__2 mx-auto py-4 d-flex justify-content-center align-items-center ">
+        <h4 class="text-left text-lg-center color-change w-75" style="font-family: Proxima-reg;">Our Offer: Intelligent Automation. Real-time Insights. Unparalleled Results.</h4>
+
+    </div>
+    <div class="section__3 mx-auto py-5">
+        <div class="custom-container mx-auto row align-items-center">
+            <div class="col-lg-6">
+                <h4 class="text-center text-lg-left mb-4 mb-lg-0 w-75 d-block mx-auto" style="font-size: 22px;">The <span class="color-change">Benefits</span> of using Filed</h4>
+            </div>
+            <div class="col-lg-6">
+                <div class="d-block mx-lg-auto">
+                    <div *ngFor="let benefit of benefits" class="d-flex align-items-center mb-4">
+                        <object data="/assets/Icon awesome-check.svg" class="mx-4" type="image/svg+xml"></object>
+                        <p>{{benefit}}</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section__4 mx-auto py-5">
+        <div class="custom-container mx-auto row align-items-center justify-content-between">
+            <div *ngFor="let review of reviews" class="col-lg-4 py-5 px-0">
+                <div class="d-flex align-items-center mb-5">
+                    <object data="/assets/Icon material-format-quote.svg" class="mx-4" type="image/svg+xml"></object>
+                    <h5 class="mx-4">{{review.title}}</h5>
+                </div>
+                <p class="mb-4 custom-container" style="height: 100%;">{{review.message}}</p>
+                <div class="d-flex align-items-center">
+                    <div [ngStyle]="{
+                        'background-image': 'url(' + review.image + ')', 
+                        'background-position' : 'center center', 
+                        'background-size': 'cover', 
+                        'border-radius': '50%', 
+                        'height': '109px', 
+                        'width': '109px'}">
+                    </div>
+                    <div class="mx-3">
+                        <h6 class="mb-1">{{review.name}}</h6>
+                        <small>{{review.position}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="for-desktop">
+        <app-footer></app-footer>
+    </div>
+</div>

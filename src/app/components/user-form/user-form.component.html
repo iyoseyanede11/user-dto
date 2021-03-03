@@ -1,0 +1,118 @@
+<div *ngIf="!isUserForm" class="form-wrapper p-3 p-lg-5 d-block ms-auto">
+    <div class="pt-5 w-75 mx-auto mb-5 for-desktop">
+        <h3 class="mb-5 text-center" style="font-weight: 900;">Let's Start</h3>
+        <p class="mb-5 text-center">Fill out the form and we'll get in touch to get your trial set up.</p>
+    </div>
+    <p class="text-center custom-text for-mobile mb-2 pt-2 px-4" style="font-size: 18px;">Fill out the form and we'll <br> get in touch soon.</p>
+    <div class="pt-4">
+        <label>Do you want to make ads that convert?</label>
+        <div class="d-flex my-4 justify-content-start flex-nowrap">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Yes
+                </label>
+                </div>
+            <div class="form-check" style="margin-left: 25%" >
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    No
+                </label>
+            </div>
+        </div>
+        <div class="mb-5 pt-4">
+            <label class="mb-3">What's your monthly ad budget??</label>
+            <select class="form-select" style="border-radius: 10px" aria-label="Default select example">
+                <option selected>Select</option>
+                <option value="1000">One thousand</option>
+                <option value="2000">Two thousand</option>
+                <option value="3000">Three thousand</option>
+              </select>
+        </div>
+        <button class="btn btn-primary mt-4" (click)="toggleForm()" >GET STARTED</button>
+    </div>
+</div>
+
+<div *ngIf="isUserForm" class="form-wrapper p-3 p-lg-5 d-block ms-auto">
+    <div class="pt-5 w-75 mx-auto mb-3 for-desktop">
+        <h3 class="mb-3 text-center" style="font-weight: 900;">We’ll be in touch to get your trial set up.</h3>
+        <p class="text-center">Fill Out Form.</p>
+    </div>
+    <p class="text-center custom-text for-mobile mb-2 pt-2">Fill Out Details.</p>
+    <form [formGroup]="userForm" class="pt-lg-4 p-2 px-lg-3">
+        <div class="d-flex justify-content-between mt-lg-4 mb-2">
+            <div style="flex: 0.47;">
+                <label class="place-holder-label">
+                    <input type="text" [ngClass]="{'red-border-class': firstName.touched && firstName.errors}" formControlName="firstName" placeholder=" " class="form-control">
+                    <span class="px-2 py-0">First Name*</span>
+                    <small *ngIf="firstName.touched && firstName.invalid" class="text-left text-danger error-msg">This field is required</small>
+                </label>
+            </div>
+            <div style="flex: 0.47;">
+                <label class="place-holder-label">
+                    <input type="text" [ngClass]="{'red-border-class': lastName.touched && lastName.errors}"  formControlName="lastName" placeholder=" " class="form-control">
+                    <span class="px-2 py-0">Last Name*</span>
+                </label>
+                <small *ngIf="lastName.touched && lastName.invalid" class="text-left text-danger error-msg">This field is required</small>
+            </div>
+        </div>
+        <label class="place-holder-label for-mobile">
+            <input type="text" formControlName="company" placeholder=" " class="form-control">
+            <span class="px-2 py-0">Company name*</span>
+        </label>
+        <label class="place-holder-label for-mobile">
+            <input type="text" [ngClass]="{'red-border-class': email.touched && email.errors}"  formControlName="email" placeholder=" " class="form-control">
+            <span class="px-2 py-0">Email*</span>
+            <div *ngIf="email.touched && email.invalid" class="text-right text-danger error-msg">
+                <small class="d-block" *ngIf="email.errors.required">This field is required. </small>
+                <small class="d-block" *ngIf="email.errors.email">Please enter a valid email </small>
+            </div>
+        </label>
+        <label class="place-holder-label for-desktop mb-5">
+            <input type="text" [ngClass]="{'red-border-class': email.touched && email.errors}" formControlName="email" placeholder=" " class="form-control">
+            <span class="px-2 py-0">Work Email*</span>
+            <div *ngIf="email.touched && email.invalid" class="text-right text-danger error-msg">
+                <small class="d-block" *ngIf="email.errors.required">This field is required. </small>
+                <small class="d-block" *ngIf="email.errors.email">Please enter a valid email </small>
+            </div>
+        </label>
+        <label class="place-holder-label for-desktop mb-5">
+            <input type="text" [ngClass]="{'red-border-class': advertBudget.touched && advertBudget.errors}"  formControlName="advertBudget" placeholder=" " class="form-control">
+            <span class="px-2 py-0">Monthly Advertising Budget*</span>
+            <div *ngIf="advertBudget.touched && advertBudget.invalid" class="text-right text-danger error-msg">
+                <small class="d-block" *ngIf="advertBudget.errors.required">This field is required.</small>
+                <small class="d-block" *ngIf="advertBudget.errors.pattern">This field accepts digits only. </small>
+              </div>
+        </label>
+        <label class="place-holder-label for-mobile">
+            <select class="form-select" [ngClass]="{'red-border-class': advertBudget.touched && advertBudget.errors}"  formControlName="advertBudget" style="border-radius: 10px; font-size: 14px;" aria-label="Default select example">
+                <option selected value="" disabled>Monthly Advertising Budget*</option>
+                <option value="1000">One thousand</option>
+                <option value="2000">Two thousand</option>
+                <option value="3000">Three thousand</option>
+              </select>
+              <div *ngIf="advertBudget.touched && advertBudget.invalid" class="text-right text-danger error-msg">
+                <small class="d-block" *ngIf="advertBudget.errors.required">This field is required.</small>
+                <small class="d-block" *ngIf="advertBudget.errors.pattern">This field accepts digits only. </small>
+              </div>
+        </label>
+        <div [ngClass]="{'red-border-class': phoneNumber.touched && phoneNumber.errors || phoneNumber.touched && country.invalid}"  class="fieldset d-flex justify-content-around align-items-center">
+            <select class="country" formControlName="country" (change)="findCountry($event)" style="padding: 0px; border: none !important; width: 50% !important;">
+                <option value="" selected disabled>Select Country</option>
+                <option *ngFor="let country of countries" value="{{country.dialCode}}">{{country.name}}</option>
+            </select>
+            <div style="border-bottom: 1px solid #dedede; width: 50%;">
+                <small *ngIf="selectedCountry" style="font-size: 15px; width: 30%;">{{selectedCountry.dialCode}}</small>
+                <input type="text" formControlName="phoneNumber" style="padding: 0px 0px 0px 5px; border: none !important; width: 70%;">
+            </div>
+        </div>
+        <div *ngIf="phoneNumber.touched && phoneNumber.invalid" class="text-right text-danger error-msg">
+            <small style="font-family: Proxima-bold;" class="d-block" *ngIf="phoneNumber.errors.minlength"> Phone number shouldn't be less than {{phoneNumber.errors.minlength.requiredLength}}.</small>
+            <small style="font-family: Proxima-bold;" class="d-block" *ngIf="phoneNumber.errors.maxlength"> Phone number shouldn't be more than {{phoneNumber.errors.maxlength.requiredLength}}.</small>
+            <small style="font-family: Proxima-bold;" class="d-block" *ngIf="phoneNumber.errors.required">This field is required. </small>
+            <small style="font-family: Proxima-bold;" class="d-block" *ngIf="phoneNumber.errors.pattern">This field accepts digits only. </small>
+        </div>
+        <small style="font-family: Proxima-bold;"  *ngIf="phoneNumber.touched && country.invalid" class="text-left text-danger error-msg">Please select a country</small>
+        <button [disabled]="userForm.invalid" class="btn btn-primary mt-4" (click)="toggleForm()" >GET STARTED</button>
+    </form>
+</div>

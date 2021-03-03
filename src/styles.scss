@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+html, body{
+    --custom-text: #38CCF5 !important;
+    overflow-x: hidden;
+}
+.custom-text{
+    color: var(--custom-text) !important;
+}
+.custom-container{
+    width: 90%;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: Proxima-bold, Helvetica, Arial, sans-serif;
+}
+.for-desktop{
+ display: none;   
+}
+.for-mobile{
+ display: block;   
+}
+@media only screen and (min-width: 577px){
+.for-desktop{
+    display: block;   
+    }
+    .for-mobile{
+    display: none;   
+    }
+}
+@media only screen and (min-width: 768px){
+    .custom-container{
+        width: 85%;
+    }
+}
+@font-face {
+    font-family: Proxima-bold;
+    src: url(assets/fonts/proxima/FontsFree-Net-Proxima-Nova-Sbold.otf) format("opentype");
+  }
+  @font-face {
+    font-family: Proxima-reg;
+    src: url(assets/fonts/proxima/FontsFree-Net-proxima_nova_reg-webfont.ttf) format("opentype");
+  }

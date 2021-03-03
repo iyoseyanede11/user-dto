@@ -1,0 +1,93 @@
+.btn-primary{
+    background-color: #FF6E4E !important;
+    width: 100%;
+    border: none !important;
+    border-radius: 10px !important;
+    border-radius: 5px !important;
+    padding: 12px 0px;
+}
+h1,h2,h3,h4,h5,h6,p, label{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+p{
+    font-weight: 500;
+}
+label{
+    font-weight: 500;
+}
+.form-wrapper{
+    background-color: #FBFBFB;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px #00000029;
+}
+.place-holder-label {
+    margin:10px 0;
+    position:relative;
+    width: 100%;
+  }
+    
+  span {
+    pointer-events: none;
+    position:absolute;
+    left:0;
+    top:0;
+    transition: 0.2s;
+    transition-timing-function: ease;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    background-color: transparent;
+    color: black;
+    font-size: 14px;
+    margin-top: 12px;
+    margin-left: 10px;
+    font-weight: 400;
+}
+input:focus + span, input:not(:placeholder-shown) + span {
+    transform: scale(0.75) translateY(-70%) translateX(-5px);
+    color: #909090;
+    background-color: rgb(251,251,251);
+    margin-top: 0;
+    margin-left: 0;
+}
+
+/* For IE Browsers*/
+input:focus + span, input:not(:-ms-input-placeholder) + span {
+    color: #909090;
+    margin-top: 0;
+    margin-left: 0;
+    background-color: rgb(251,251,251);
+    transform: scale(0.75) translateY(-70%) translateX(-5px);
+  }
+input[type= text], input[type= number], select, .fieldset{
+    border-radius: 5px !important;
+    padding: 10px;
+    background-color: inherit;
+    border: 1px solid #DEDEDE ;
+    font-size: 15px;
+}
+input:focus, select:focus{
+    background-color: inherit;
+    outline: none;
+}
+.red-border-class{
+    border-color: red !important;
+}
+
+  @media only screen and (min-width: 577px){
+    .form-wrapper{
+        border-radius: 30px;
+    }
+    .place-holder-label {
+        margin:20px 0;
+      }
+    input[type= text], input[type= number], select, .fieldset{
+        border-radius: 10px !important;
+        background-color: white;
+    }
+    input:focus{
+        background-color: white;
+    }
+    .btn-primary{
+        border-radius: 10px !important;
+        padding: 11px 0px;
+    }
+}
